@@ -1,0 +1,25 @@
+name: Deploy Docker Image to Artifact Registry
+
+on:
+  workflow_dispatch:  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Configure Docker Authentication
+        run: |
+          gcloud auth configure-docker asia-south1-docker.pkg.dev
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t asia-south1-docker.pkg.dev/thunderstorm-development/demo-push-repo2/dummy-image-1:latest
+          docker push asia-south1-docker.pkg.dev/thunderstorm-development/demo-push-repo2/dummy-image-1:latest
