@@ -20,12 +20,11 @@ jobs:
         run: |
           gcloud auth configure-docker us-east4-docker.pkg.dev
 
-      - name: Disable BuildKit
-        run: echo "DOCKER_BUILDKIT=0" >> $GITHUB_ENV
-
       - name: Build Docker Image
         run: |
           docker build -t us-east4-docker.pkg.dev/thunderstorm-development/demo-push-repo1/dummy-image:latest .
+        env:
+          DOCKER_BUILDKIT: 0
 
       - name: Push Docker Image
         run: |
