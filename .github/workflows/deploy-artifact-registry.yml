@@ -20,6 +20,12 @@ jobs:
         run: |
           gcloud auth configure-docker us-east4-docker.pkg.dev
 
+      - name: Set Docker to classic builder
+        run: |
+          echo "DOCKER_CLI_EXPERIMENTAL=disabled" >> $GITHUB_ENV
+          echo "DOCKER_BUILDKIT=0" >> $GITHUB_ENV
+
+
       - name: Build Docker Image
         run: |
           docker build -t us-east4-docker.pkg.dev/thunderstorm-development/demo-push-repo1/dummy-image:latest .
