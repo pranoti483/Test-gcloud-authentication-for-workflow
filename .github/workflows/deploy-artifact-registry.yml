@@ -26,4 +26,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push us-east4-docker.pkg.dev/thunderstorm-development/demo-push-repo1/dummy-image-1:latest
+          docker push us-east4-docker.pkg.dev/thunderstorm-development/demo-push-repo1/dummy-image:latest
