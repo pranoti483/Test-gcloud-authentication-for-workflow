@@ -18,11 +18,11 @@ jobs:
 
       - name: Configure Docker Authentication
         run: |
-          gcloud auth configure-docker asia-south1-docker.pkg.dev
+          gcloud auth configure-docker us-east4-docker.pkg.dev
 
       - name: Build Docker Image
         run: |
-          docker build -t us-east4-docker.pkg.dev/thunderstorm-development/demo-push-repo1/dummy-image:latest
+          docker build -t us-east4-docker.pkg.dev/thunderstorm-development/demo-push-repo1/dummy-image:latest .
 
       - name: Push Docker Image
         run: |
