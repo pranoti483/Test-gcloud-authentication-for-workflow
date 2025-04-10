@@ -22,7 +22,6 @@ jobs:
           token_format: "access_token"
           workload_identity_provider: "projects/211378719386/locations/global/workloadIdentityPools/github-actions/providers/github"
           service_account: "github-building-docker@thunderstorm-development.iam.gserviceaccount.com"
-          audience: "https://github.com/amagimedia/dam"
 
       - name: Configure Docker for Artifact Registry
         run: |
