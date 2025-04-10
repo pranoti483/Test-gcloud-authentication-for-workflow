@@ -20,8 +20,8 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           token_format: "access_token"
-          workload_identity_provider: "projects/211378719386/locations/global/workloadIdentityPools/github-actions/providers/github"
-          service_account: "github-building-docker@thunderstorm-development.iam.gserviceaccount.com"
+          workload_identity_provider: ""
+          service_account: ""
 
       - name: Configure Docker for Artifact Registry
         run: |
@@ -34,11 +34,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t asia-south1-docker.pkg.dev/thunderstorm-development/demo-push-repo2/dummy-image
+          docker build -t 
         env:
           DOCKER_BUILDKIT: 0
 
       - name: Push Docker Image
         run: |
-          docker push asia-south1-docker.pkg.dev/thunderstorm-development/demo-push-repo2/dummy-image
+          docker push 
 
