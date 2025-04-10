@@ -3,7 +3,7 @@ name: EKS Daily Start & Stop
 on:
   schedule:
     - cron: '0 22 1-5 * *'  
-    - cron: '0 9 1-5 * *'  
+    - cron: '0 8 1-5 * *'  
 
 permissions:
   id-token: write     
