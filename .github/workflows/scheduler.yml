@@ -22,7 +22,7 @@ jobs:
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::211378719386:role/github-eks-start-stop
+          role-to-assume: arn:aws:iam::421939322861:role/github-eks-start-stop
           aws-region: us-east-1
 
       - name: Set up Python
@@ -50,7 +50,7 @@ jobs:
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::211378719386:role/github-eks-start-stop
+          role-to-assume: arn:aws:iam::421939322861:role/github-eks-start-stop
           aws-region: us-east-1
 
       - name: Set up Python
