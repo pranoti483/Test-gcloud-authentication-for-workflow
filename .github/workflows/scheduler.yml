@@ -1,0 +1,67 @@
+name: EKS Daily Start & Stop
+
+on:
+  schedule:
+    - cron: '0 22 1-5 * *'  
+    - cron: '0 9 1-5 * *'  
+
+permissions:
+  id-token: write     
+  contents: read       
+
+jobs:
+  eks-start:
+    if: github.event.schedule == '0 9 1-5 * *'
+    runs-on: ubuntu-latest
+    name: Start EKS Cluster (Morning)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::211378719386:role/github-eks-start-stop
+          aws-region: us-east-1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install required Python packages
+        run: |
+          pip install boto3 pyyaml
+
+      - name: Run EKS Start
+        run: |
+          python eks_manager.py amg tsv2-demo2 start
+
+  eks-stop:
+    if: github.event.schedule == '0 22 1-5 * *'
+    runs-on: ubuntu-latest
+    name: Stop EKS Cluster (Night)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::211378719386:role/github-eks-start-stop
+          aws-region: us-east-1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install required Python packages
+        run: |
+          pip install boto3 pyyaml
+
+      - name: Run EKS Stop
+        run: |
+          python eks_manager.py amg tsv2-demo2 stop
