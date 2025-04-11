@@ -2,7 +2,7 @@ name: EKS Daily Start & Stop
 
 on:
   schedule:
-    - cron: '30 2 * * 1-5'     # 8:00 AM IST → 2:30 AM UTC
+    - cron: '15 5 * * 1-5'    # 8:00 AM IST → 2:30 AM UTC
     - cron: '30 16 * * 1-5'    # 10:00 PM IST → 4:30 PM UTC
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   eks-start:
-    if: github.event.schedule == '30 2 * * 1-5'
+    if: github.event.schedule == '15 5 * * 1-5'
     runs-on: ubuntu-latest
     name: Start EKS Cluster (Morning)
 
