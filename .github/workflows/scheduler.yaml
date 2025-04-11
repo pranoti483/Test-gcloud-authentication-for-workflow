@@ -2,18 +2,16 @@ name: EKS Daily Start & Stop
 
 on:
   schedule:
-    - cron: '20 9 * * *'     # ✅ Run start job at 9:20 AM UTC
-    - cron: '0 22 1-5 * *'   # Stop at 10 PM UTC on weekdays
-  workflow_dispatch:         # Manual trigger for testing
+    - cron: '30 2 * * 1-5'     # 8:00 AM IST → 2:30 AM UTC
+    - cron: '30 16 * * 1-5'    # 10:00 PM IST → 4:30 PM UTC
 
 permissions:
-  id-token: write     
-  contents: read       
+  id-token: write
+  contents: read
 
 jobs:
   eks-start:
-    # ✅ Allow this to run on manual dispatch OR if scheduled at 9:20 UTC
-    if: github.event_name != 'schedule' || github.event.schedule == '20 9 * * *'
+    if: github.event.schedule == '30 2 * * 1-5'
     runs-on: ubuntu-latest
     name: Start EKS Cluster (Morning)
 
@@ -41,8 +39,7 @@ jobs:
           python eks_manager.py amg tsv2-demo2 start
 
   eks-stop:
-    # ✅ Allow this to run on manual dispatch OR if scheduled at 10 PM UTC
-    if: github.event_name != 'schedule' || github.event.schedule == '0 22 1-5 * *'
+    if: github.event.schedule == '30 16 * * 1-5'
     runs-on: ubuntu-latest
     name: Stop EKS Cluster (Night)
 
@@ -68,4 +65,3 @@ jobs:
       - name: Run EKS Stop
         run: |
           python eks_manager.py amg tsv2-demo2 stop
-
