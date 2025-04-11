@@ -2,8 +2,8 @@ name: EKS Daily Start & Stop
 
 on:
   schedule:
-    - cron: '30 5 * * 1-5'   # ⏰ 11:00 AM IST (5:30 AM UTC)
-    - cron: '55 6 * * *'  # 🌙 10:00 PM IST (4:30 PM UTC)
+    - cron: '30 2 * * 1-5'   # ⏰ 11:00 AM IST (5:30 AM UTC)
+    - cron: '5 17 * * 1-5'   # 🌙 10:00 PM IST (4:30 PM UTC)
 
 permissions:
   id-token: write
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   eks-start:
-    if: github.event.schedule == '30 5 * * 1-5'
+    if: github.event.schedule == '30 2 * * 1-5' 
     runs-on: ubuntu-latest
     name: Start EKS Cluster (Morning)
 
@@ -39,7 +39,7 @@ jobs:
           python eks_manager.py amg tsv2-demo2 start
 
   eks-stop:
-    if: github.event.schedule == '55 6 * * *' 
+    if: github.event.schedule == '5 17 * * 1-5' 
     runs-on: ubuntu-latest
     name: Stop EKS Cluster (Night)
 
