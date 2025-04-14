@@ -1,6 +1,0 @@
-halt:
-  amg:
-    tsv2-demo2:
-      region: us-east-1
-      eks:
-        - amg-cluster-tsv2-demo2-ue1
